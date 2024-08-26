@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Commenting and Review System</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="comment">
+            
+            <div class="comment-text">
+                hi
+            </div>
+        </div>
+    <div class="container mt-5">
+        <h1>Comments and Reviews</h1>
+        <div id="comments" class="mb-4">
+         
+        </div>
+        <form id="commentForm">
+            <div class="form-group">
+                <textarea id="commentText" class="form-control" placeholder="Write a comment..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('commentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const commentText = document.getElementById('commentText').value;
+
+            fetch('comment.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'comment': commentText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Comment submitted successfully!');
+                    document.getElementById('commentText').value = '';
+                } else {
+                    alert('Failed to submit comment');
+                }
+            });
+        });
+    </script>
+         <script src="comny.js"></script>
+         <script src="compny.css"></script>
+         <script src="compny.php"></script>
+
+</body>
+</html>
